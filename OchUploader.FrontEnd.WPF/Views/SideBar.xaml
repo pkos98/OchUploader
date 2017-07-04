@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="OchUploader.FrontEnd.WPF.Views.SideBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OchUploader.FrontEnd.WPF.Views"
+             xmlns:con="clr-namespace:OchUploader;assembly=OchUploader"
+             mc:Ignorable="d" d:DesignWidth="300" Height="466">
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+            <local:SearchTextBox HorizontalAlignment="Left"/>
+            <TextBox MaxLength="4" Text="{Binding LoadedTimeRange}" Margin="10,0,0,0" />
+        </StackPanel>
+
+        <TextBlock Text="States" Margin="0,0,0,0" FontStyle="Italic"/>
+        <ListBox x:Name="StateFiltersList" Margin="0,2,0,0"
+                 ItemsSource="{Binding Source={x:Static con:Constants.AvailableStates}}" 
+                 SelectedIndex="0" SelectionMode="Extended"/>
+
+        <TextBlock Text="Source" Margin="0,10,0,0" FontStyle="Italic"/>
+        <ListBox x:Name="ProtocollFiltersList" Margin="0,2,0,0"
+                 ItemsSource="{Binding Source={x:Static con:Constants.AvailableInfoProvider}}" 
+                 SelectedIndex="0" SelectionMode="Extended"/>
+
+        <TextBlock Text="Hoster" FontStyle="Italic" Margin="0,10,0,0"/>
+        <ListBox x:Name="HostFiltersList" Margin="0,2,0,0"
+                 ItemsSource="{Binding Source={x:Static con:Constants.AvailableFileHoster}}" 
+                 SelectedIndex="0" SelectionMode="Extended"/>
+
+        <TextBlock Text="Navigation"/>
+    </StackPanel>
+</UserControl>

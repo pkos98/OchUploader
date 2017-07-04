@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="OchUploader.FrontEnd.WPF.Views.NewDirectoryPrototypeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:root="clr-namespace:OchUploader;assembly=OchUploader"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding CancelNewDirectoryCommand}"/>
+    </UserControl.InputBindings>
+    <Grid Margin="10,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Path of directory" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Row="1" metro:TextBoxHelper.Watermark="C:/Uploads/" VerticalAlignment="Top"
+                 Text="{Binding NewDirectoryPrototype.Path, UpdateSourceTrigger=PropertyChanged}" 
+                 Name="PathBox" HorizontalAlignment="Stretch"/>
+        
+
+        <!--<TextBlock Grid.Row="2" Text="Type of access"  VerticalAlignment="Bottom"/>
+        <ComboBox Grid.Row="3" metro:ComboBoxHelper.CharacterCasing="Upper"  VerticalAlignment="Top"
+                  ItemsSource="{Binding Source={x:Static root:Constants.AvailableProtocolls}}" 
+                  SelectedItem="{Binding NewDirectoryPrototype.Protocoll}"/>-->
+        
+        <TextBlock Grid.Row="4" Text="File-Hoster"  VerticalAlignment="Bottom"/>
+        <ComboBox Grid.Row="5" ItemsSource="{Binding Source={x:Static root:Constants.AvailableFileHoster}}"
+                  VerticalAlignment="Top" SelectedItem="{Binding NewDirectoryPrototype.Host}"/>
+
+        <Button Grid.Row="6" Content="Add" Command="{Binding FinishAddNewDirectoryCommand}" Width="100" VerticalAlignment="Bottom"/>
+    </Grid>
+</UserControl>

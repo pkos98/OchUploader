@@ -1,0 +1,51 @@
+﻿<metro:MetroWindow x:Class="OchUploader.FrontEnd.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:OchUploader.FrontEnd.WPF.Views"
+        xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:converter="clr-namespace:OchUploader.FrontEnd.WPF.Converter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000" WindowState="Maximized" ResizeMode="CanResize" Loaded="MetroWindow_Initialized">
+    <metro:MetroWindow.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding BeginAddNewDirectoryCommand}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveDirectoriesCommand}"/>
+        <KeyBinding Key="F5" Command="{Binding ReloadFromDatabaseCommand}"/>
+        <KeyBinding Key="Delete" Command="{Binding RemoveSelectedDirectoriesCommand}"/>
+        <KeyBinding Key="Esc" Command="{Binding UnselectSelectedDirectoriesCommand}"/>
+    </metro:MetroWindow.InputBindings>
+    <metro:MetroWindow.Resources>
+        <converter:NullBoolValueConverter x:Key="NullBoolConverter"/>
+    </metro:MetroWindow.Resources>
+    <metro:MetroWindow.Flyouts>
+        <metro:FlyoutsControl>
+            <metro:Flyout Header="New directory" Position="Right" Width="350" 
+                          IsOpen="{Binding NewDirectoryPrototype, Converter={StaticResource NullBoolConverter}}" Theme="Adapt"
+                          CloseCommand="{Binding CancelNewDirectoryCommand}"
+                          AnimateOpacity="True" AreAnimationsEnabled="True">
+                <metro:Flyout.InputBindings>
+                    <KeyBinding Key="Esc" Command="{Binding CancelNewDirectoryCommand}"/>
+                </metro:Flyout.InputBindings>
+                <views:NewDirectoryPrototypeView/>
+            </metro:Flyout>
+        </metro:FlyoutsControl>
+    </metro:MetroWindow.Flyouts>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <MenuItem Header="File" />
+        </Menu>
+        <views:SideBar Grid.Row="1" Grid.Column="0" Margin="2,-75,5,0" Grid.RowSpan="2"/>
+        <views:UploadsListView Grid.Row="1" Grid.Column="1" Margin="0,5,0,0" VerticalAlignment="Stretch"/>
+        <views:LastActionDisplay Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+    </Grid>
+</metro:MetroWindow>
